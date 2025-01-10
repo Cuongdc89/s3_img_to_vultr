@@ -1,7 +1,7 @@
-import { downloadImage } from './services/awsS3';
-import { generateThumbnail } from './services/thumbnail';
-import { uploadToVultr } from './services/vultr';
-import { getConnection } from './config/db';
+const { downloadImage } = require('./services/awsS3');
+const { generateThumbnail } = require('./services/thumbnail');
+const { uploadToVultr } = require('./services/vultr');
+const db = require('./config/db');
 
 (async () => {
   try {
@@ -25,7 +25,7 @@ import { getConnection } from './config/db';
 
     // 4. Lưu thông tin ảnh vào database
     console.log('Saving image info to database...');
-    const connection = await getConnection();
+    const connection = await db.getConnection();
     await connection.execute(
       'INSERT INTO images (key, original_url, thumbnail_url) VALUES (?, ?, ?)',
       [

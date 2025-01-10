@@ -1,5 +1,5 @@
-import sharp from 'sharp';
+const sharp = require('sharp');
 
-export async function generateThumbnail(imageBuffer, width = 200, height = 200) {
+module.exports.generateThumbnail = async (imageBuffer, width = 200, height = 200) => {
   return sharp(imageBuffer).resize(width, height).toBuffer();
-}
+};

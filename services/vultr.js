@@ -1,7 +1,7 @@
-import { post } from 'axios';
+const axios = require('axios');
 require('dotenv').config();
 
-export async function uploadToVultr(fileName, fileBuffer) {
+module.exports.uploadToVultr = async (fileName, fileBuffer) => {
   const url = process.env.VULTR_API_URL;
   const headers = {
     'Content-Type': 'multipart/form-data',
@@ -11,5 +11,5 @@ export async function uploadToVultr(fileName, fileBuffer) {
   const formData = new FormData();
   formData.append('file', fileBuffer, fileName);
 
-  return post(url, formData, { headers });
-}
+  return axios.post(url, formData, { headers });
+};
